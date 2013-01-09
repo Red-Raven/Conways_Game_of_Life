@@ -3,10 +3,14 @@ FEATURES:
 User-defined grid size.
 User-defined iteration speed, or user-option to iterate on button press.
 Help command for rules and controls.
+Restart command that let's the user set a new board afer ending the last board or reaching a repeating board.
+Command that allows user to stop automatic/endless mode.
 Endless mode that randomly generates new cells once board is dead. User-defined repitition length will trigger it.
 Spaces b/w ASCII characters to make grid more even.
 GUI.
 Ability to save/load grids.
+
+Modes: Single Step, automatic, endless.
 
 TODO:
 Clear board after each iteration.
