@@ -1,7 +1,8 @@
 FEATURES:
 
-User-defined grid size.
+[DONE]User-defined grid size.
 User-defined iteration speed, or user-option to iterate on button press.
+User-defined rules (Standard: B3/S23).
 Help command for rules and controls.
 Restart command that let's the user set a new board afer ending the last board or reaching a repeating board.
 Command that allows user to stop automatic/endless mode.
