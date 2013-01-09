@@ -1,0 +1,19 @@
+FEATURES:
+
+User-defined grid size.
+User-defined iteration speed, or user-option to iterate on button press.
+Help command for rules and controls.
+Endless mode that randomly generates new cells once board is dead. User-defined repitition length will trigger it.
+Spaces b/w ASCII characters to make grid more even.
+GUI.
+Ability to save/load grids.
+
+TODO:
+Clear board after each iteration.
+Add scanning of edge cells.
+Figure out what caused that bug.
+
+WHEN FINISHED:
+Update comments.
+General clean up. Possible optimization and modulation.
+Use more meaningful variables.
