@@ -1,0 +1,191 @@
+/**
+ * This is an implementation of Comway's Game of Life. It is a computer simulation
+ * that runs on a grid of "cells". Each cell can be dead or alive depending on 
+ * the number of live cells nearby. Each cell has 8 neighbors (shown bellow in
+ * the CHECK ORDER) that affect it.
+ * 
+ * @author Drew Langston 
+ * @version Alpha .1
+ */
+ 
+/*
+ * RULES (Just for convenience):
+ * 1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+ * 2. Any live cell with two or three live neighbours lives on to the next generation.
+ * 3. Any live cell with more than three live neighbours dies, as if by overcrowding.
+ * 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+ * 
+ * CHECK ORDER (neighborCount method):
+ * 1 2 3
+ * 4 C 5
+ * 6 7 8
+ */
+ 
+import java.util.Scanner;
+public class Conway2
+{
+    //Sets all elements of any String[][] to "-".
+    public static String[][] blankBoard(int a, int b)
+    {
+        String[][] blank = new String[a][b];
+        for ( int x = 0; x < blank.length; x++ )
+        {
+            for ( int i = 0; i < blank[0].length; i++ )
+            {
+                blank[x][i] = "-";
+            }
+        }
+        return blank;
+    }
+ 
+    //prints all elements of any String[][]
+    public static void printBoard(String[][] show)
+    {
+        for ( int x = 0; x < show.length; x++ )
+        {
+            for ( int i = 0; i < show[0].length; i++ )
+            {
+                System.out.print(show[x][i]);
+            }
+            System.out.println();
+        }
+    }
+ 
+    //reports the number of neighbors each conway has.
+    //ensures the scan wraps around the edges so edge conways have 8 neighbors and no out of bounds exceptions are thrown.
+    public static int neighborCount(String[][] check, int x, int i)
+    {
+        int c = 0;
+        //checks top left corner conway
+        //         if ( x == 0 && i == 0 )
+        //         {
+        //             if ( check[check.length - 1][check[0].length - 1].equals( "+" ) )
+        //                 c++;
+        //             if ( check[check.length - 1][0].equals( "+" ) )
+        //                 c++;
+        //             if ( check[check.length - 1][1].equals( "+" ) )
+        //                 c++;
+        //             if ( check[0][check[0].length - 1].equals( "+" ) )
+        //                 c++;
+        //             if ( check[0][1].equals( "+" ) )
+        //                 c++;
+        //             if ( check[1][check[0].length - 1].equals( "+" ) )
+        //                 c++;
+        //             if ( check[1][0].equals( "+" ) )
+        //                 c++;
+        //             if ( check[1][1].equals( "+" ) )
+        //                 c++;
+        //             return c;
+        //         }
+        // 
+        //         //checks top right corner conway
+        //         else if ( x == 0 && i == ( check[0].length - 1 ) )
+        //         {
+        // 
+        //         }
+        // 
+        //         //checks bottom left corner conway
+        //         else if ( x == ( check.length - 1 ) && i == 0 )
+        //         {
+        // 
+        //         }
+        // 
+        //         //checks bottom right corner conway
+        //         else if (x == ( check.length - 1 ) && i == ( check.length - 1 ) )
+        //         {
+        // 
+        //         }
+        // 
+        //         //checks bottom and top edges
+        //         else if ( x == 0 || x == ( check.length - 1 ) )
+        //         {
+        //             if ( check[check.length][i - 1].equals( "+" ) )
+        //                 c++;
+        //         }
+        // 
+        //         //checks left and right edges
+        //         else if ( i == 0 || i == ( check[0].length - 1 ) )
+        //         {
+        // 
+        //         }
+        // 
+        //         //checks all non-edge conways.
+        //         else {
+        if ( check[x - 1][i - 1].equals( "+" ) )
+            c++;
+        if ( check[x - 1][i].equals( "+" ) )
+            c++;
+        if ( check[x - 1][i + 1].equals( "+" ) )
+            c++;
+        if ( check[x][i - 1].equals( "+" ) )
+            c++;
+        if ( check[x][i + 1].equals( "+" ) )
+            c++;
+        if ( check[x + 1][i - 1].equals( "+" ) )
+            c++;
+        if ( check[x + 1][i].equals( "+" ) )
+            c++;
+        if ( check[x + 1][i + 1].equals( "+" ) )
+            c++;
+        return c;
+        //         }
+        //         return c;
+ 
+    }
+ 
+    public static void main(String[] args)
+    {
+        //sets up variables
+        System.out.println("Please input strings of +'s and -'s exactly 10 character in length");
+        Scanner startBoard = new Scanner(System.in);
+        Scanner iterate = new Scanner(System.in);
+        String[][] liveBoard = new String[10][10];
+        String[][] nextBoard = new String[10][10];
+        boolean conwaysAlive = true;
+ 
+        //generates first liveBoard from user input
+        //****later, implement format checking****
+        for ( int x = 0; x < liveBoard.length; x++ )
+        {
+            String oneRow = startBoard.nextLine();
+            for ( int i = 0; i < liveBoard[0].length; i++ )
+            {
+                liveBoard[x][i] = oneRow.substring(i, i + 1);
+            }
+        }
+        nextBoard = blankBoard(nextBoard.length, nextBoard[0].length);
+ 
+        while ( conwaysAlive == true )
+        {
+            //read current values of liveBoard[][], use game rules to assign values of next iteration to nextBoard[][]
+            //also checks for any live conways
+            conwaysAlive = false;
+            for ( int x = 1; x < liveBoard.length - 2; x++ ){
+                for ( int i = 1; i < liveBoard[0].length - 2; i++ ){
+                    int n = neighborCount( liveBoard, x, i );
+                    if ( liveBoard[x][i].equals( "+" ) && ( n == 2 || n == 3 ) )
+                    {
+                        nextBoard[x][i] = "+";
+                        conwaysAlive = true;
+                    }
+                    else
+                    {
+                        if ( n == 3 )
+                        {
+                            nextBoard[x][i] = "+";
+                            conwaysAlive = true;
+                        }
+                    }
+                }
+            }
+ 
+            //Sets liveBoard equal to nextBoard, prints the liveBoard, blanks the nextBoard.
+            String step = iterate.nextLine();
+            liveBoard = nextBoard;
+            printBoard(liveBoard);
+            nextBoard = blankBoard(nextBoard.length, nextBoard[0].length);
+ 
+        }
+        System.out.println("All Conways terminated. Please restart program.");
+    }
+}
