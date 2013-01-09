@@ -22,3 +22,5 @@ WHEN FINISHED:
 Update comments.
 General clean up. Possible optimization and modulation.
 Use more meaningful variables.
+
+Just for fun, if possible, create a massive simulation that reaches the maximum limit reachable with ints or doubles.
