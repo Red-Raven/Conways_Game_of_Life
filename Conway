@@ -6,8 +6,11 @@
  * 
  * @author Drew Langston 
  * @version Alpha .1
+ * 
+ * Special thanks to the following redditors who helped with the code: 343346E, Suttonian.
+ * Special thanks to the following redditors who helped me understand some things:  yash3ahuja.
  */
- 
+
 /*
  * RULES (Just for convenience):
  * 1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
@@ -20,10 +23,37 @@
  * 4 C 5
  * 6 7 8
  */
- 
+
 import java.util.Scanner;
 public class Conway2
 {
+    //Generates a startBoard from user input
+    public static String[][] startBoard()
+    {
+        //Creates the startBoard using user input for length/width.
+        Scanner startBoardInfo = new Scanner(System.in);
+        System.out.println("Please input a 2 numbers sperarates by a comma like this: 10,11. These will be the hight and width of the grid, respectively.");
+        String dimensions = startBoardInfo.nextLine();
+        int r = Integer.parseInt( dimensions.substring( 0, dimensions.indexOf( "," ) ) );
+        int c = Integer.parseInt( dimensions.substring( dimensions.indexOf( "," ) + 1 ) );
+        
+        String[][] startBoard = new String[r][c];
+        
+        //fills all elements of startBoard with user inupt.
+        //****later, implement format checking****
+        System.out.println("Please input " + r + " strings of " + c + " +'s and -'s.");
+        for ( int x = 0; x < startBoard.length; x++ )
+        {
+            String oneRow = startBoardInfo.nextLine();
+            for ( int i = 0; i < startBoard[0].length; i++ )
+            {
+                startBoard[x][i] = oneRow.substring(i, i + 1);
+            }
+        }
+        return startBoard;
+
+    }
+
     //Sets all elements of any String[][] to "-".
     public static String[][] blankBoard(int a, int b)
     {
@@ -37,7 +67,7 @@ public class Conway2
         }
         return blank;
     }
- 
+
     //prints all elements of any String[][]
     public static void printBoard(String[][] show)
     {
@@ -50,7 +80,7 @@ public class Conway2
             System.out.println();
         }
     }
- 
+
     //reports the number of neighbors each conway has.
     //ensures the scan wraps around the edges so edge conways have 8 neighbors and no out of bounds exceptions are thrown.
     public static int neighborCount(String[][] check, int x, int i)
@@ -130,31 +160,17 @@ public class Conway2
         return c;
         //         }
         //         return c;
- 
+
     }
- 
+
     public static void main(String[] args)
     {
         //sets up variables
-        System.out.println("Please input strings of +'s and -'s exactly 10 character in length");
-        Scanner startBoard = new Scanner(System.in);
         Scanner iterate = new Scanner(System.in);
-        String[][] liveBoard = new String[10][10];
-        String[][] nextBoard = new String[10][10];
+        String[][] liveBoard = startBoard();
+        String[][] nextBoard = blankBoard(liveBoard.length, liveBoard[0].length);
         boolean conwaysAlive = true;
- 
-        //generates first liveBoard from user input
-        //****later, implement format checking****
-        for ( int x = 0; x < liveBoard.length; x++ )
-        {
-            String oneRow = startBoard.nextLine();
-            for ( int i = 0; i < liveBoard[0].length; i++ )
-            {
-                liveBoard[x][i] = oneRow.substring(i, i + 1);
-            }
-        }
-        nextBoard = blankBoard(nextBoard.length, nextBoard[0].length);
- 
+
         while ( conwaysAlive == true )
         {
             //read current values of liveBoard[][], use game rules to assign values of next iteration to nextBoard[][]
@@ -178,13 +194,17 @@ public class Conway2
                     }
                 }
             }
- 
+
             //Sets liveBoard equal to nextBoard, prints the liveBoard, blanks the nextBoard.
             String step = iterate.nextLine();
+            if ( step.equals( "exit" ) )
+            {
+                conwaysAlive = false;
+            }
             liveBoard = nextBoard;
             printBoard(liveBoard);
             nextBoard = blankBoard(nextBoard.length, nextBoard[0].length);
- 
+
         }
         System.out.println("All Conways terminated. Please restart program.");
     }
