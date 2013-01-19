@@ -15,8 +15,8 @@ Modes: Single Step, automatic, endless.
 
 TODO:
 Clear board after each iteration.
-Add scanning of edge cells.
-Figure out what caused that bug.
+Move cammand input so that the nextBoard is calculated, then the command is taken. This will be more efficient
+b/c the board can load while waiting for input.
 
 WHEN FINISHED:
 Update comments.
