@@ -56,8 +56,7 @@ public class Conway3
 
     }
 
-    //Sets all elements of any String[][] to "-".
-    //currently unused.
+    //generates a String[][] whos elements are "-"'s.
     public static String[][] blankBoard(int a, int b)
     {
         String[][] blank = new String[a][b];
