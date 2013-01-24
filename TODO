@@ -8,9 +8,10 @@ Restart command that let's the user set a new board afer ending the last board o
 Command that allows user to stop automatic/endless mode.
 Endless mode that randomly generates new cells once board is dead. User-defined repitition length will trigger it.
 Spaces b/w ASCII characters to make grid more even.
-GUI.
+GUI (colored clickable grid squares, buttons for commands, zooming)
 Ability to save/load grids.
 Command that allows user to choose wether or not the board is cleared or the next one is printed below the last one.
+Allow users to choose wheather toriodal array is used, or the edges remain dead at all times.
 
 Modes: Single Step, automatic, endless.
 
@@ -25,3 +26,7 @@ General clean up. Possible optimization and modulation.
 Use more meaningful variables.
 
 Just for fun, if possible, create a massive simulation that reaches the maximum limit reachable with ints or doubles.
+Must add tons of efficiency algorithms. Focus one ones that skip dead space and predict oscillators & gliders.
+
+Essentially, I want to add every feature imaginable to this list. I'll get to some things, but not all. I just want to
+have a full list to choose from, so leave any additions you have in the comments please.
